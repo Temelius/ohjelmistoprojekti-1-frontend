@@ -1,38 +1,38 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react'
 
-function QuizList() {
-  const [selectedQuiz, setSelectedQuiz] = React.useState([]);
-  const [questions, setQuestions] = React.useState([]);
-  
+const App = () => {
+
+  const [quizList, setQuizList] = useState([])
+
   useEffect(() => {
-    getselectedQuiz();
-  }, []);
+      getQuizList()
+  }, [])
 
-  const getselectedQuiz = () => {
-    fetch('https://ohjelmistoprojekti-1-backend.herokuapp.com/api/quiz/2')
+  // Get a list of all quizzes
+  const API_URL = 'https://ohjelmistoprojekti-1-backend.herokuapp.com/api/quiz/list'
+
+  const getQuizList = () => {
+    fetch(API_URL)
       .then(response => response.json())
-      .then(responseData => {
-          setSelectedQuiz(responseData);
-          setQuestions(responseData.question);
+      .then(data => {
+        console.log(data)
+        setQuizList(data)
       })
       .catch(err => console.error(err))
-
-      console.log(selectedQuiz);
   }
 
   return (
     <div>
-      <h2> {selectedQuiz.quizName} </h2>
+      <h1>Quiz List</h1>
       <table>
         <tbody>
-          <tr>
-            <th>Question </th>
-            <th>Answer </th>
-          </tr>
+        <tr>
+          <th>Quiz Name</th>
+        </tr>
           {
-            questions.map((quiz) =>
-              <tr key={quiz.questionid}>
-                <td>{quiz.questionline}</td>
+            quizList.map((quiz) =>
+              <tr key={quiz.quizId}>
+                <td>{quiz.quizName}</td>
               </tr>
             )
           }
@@ -40,7 +40,6 @@ function QuizList() {
       </table>
     </div>
   )
-
 }
 
-export default QuizList;
+export default App;
