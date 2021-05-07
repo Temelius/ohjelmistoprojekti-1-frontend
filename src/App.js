@@ -1,102 +1,31 @@
-import React, { useEffect } from 'react';
+import React, { useState } from 'react';
+import './App.css';
+import AppBar from '@material-ui/core/AppBar';
+import Tabs from '@material-ui/core/Tabs';
+import Tab from '@material-ui/core/Tab';
+import RadioKysymys from './components/RadioKysymys';
+import AvoinKysymys from './components/AvoinKysymys';
 
-function QuizList() {
-  const [selectedQuiz, setSelectedQuiz] = React.useState([]);
-  const [questions, setQuestions] = React.useState([]);
-  const [ans, setAns] = React.useState("");
-  useEffect(() => {
-    getselectedQuiz();
-  }, []);
+function App() {
 
-  const getselectedQuiz = () => {
-    fetch('https://ohjelmistoprojekti-1-backend.herokuapp.com/api/quiz/2')
-      .then(response => response.json())
-      .then(responseData => {
-        setSelectedQuiz(responseData);
-        setQuestions(responseData.question);
-      })
-      .catch(err => console.error(err))
-  }
+  const [value, setValue] = useState('radio');
 
-
-  const sendAnswer = () => {
-    fetch('https://ohjelmistoprojekti-1-backend.herokuapp.com/api/useranswers', {
-      method: 'POST',
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        userAnswerLine: ans,
-        
-      })
-    
-    })
-
-    alert('Valitsin vastauksen ' + ans + '. Vastaus tallennettu!')
-  }
-
-  const inputChanged = (event) => {
-    setAns(event.target.value);
-  }
-
-
+  const handleChange = (event, value) => {
+    setValue(value);
+  };
   return (
-    <div>
-      <center>
-        <h2> {selectedQuiz.quizName} </h2>
-        <hr />
-        <form onSubmit={sendAnswer}>
-          <table>
-            <tbody>
+    <div className="App">
+      <AppBar position="static" style={{ background: '#1E90FF' }}>
+        <Tabs value={value} onChange={handleChange} centered TabIndicatorProps={{style: {background:'#ff7b00'}} }>
+          <Tab value="radio" label="Radio Kysymys" />
+          <Tab value="avoin" label="Avoin kysymys" />
+        </Tabs>
+      </AppBar>
+      <br></br>
+      {value === 'radio' && <div><RadioKysymys /></div>}
+      {value === 'avoin' && <div><AvoinKysymys /></div>}
 
-              <tr>
-                <th>Question </th>
-                <th>Answer </th>
-
-              </tr>
-
-              {
-                questions.map((quiz) =>
-
-                  <tr key={quiz.questionid}>
-                    <td>{quiz.questionline}</td>
-
-                    <td>{quiz.answers.map((answer) =>
-
-                      <tr key={answer.answerid}>
-
-                        <td>
-
-                          <input type="radio" 
-                          value={answer.answerline} 
-                          name="useranswerline"
-                          onChange={inputChanged}
-                          />
-                          {answer.answerline}
-                        </td>
-
-
-                      </tr>
-
-                    )}
-                      <button type="submit">Vastaa</button>
-
-                    </td>
-
-                  </tr>
-
-                )
-
-              }
-
-            </tbody>
-          </table>
-        </form>
-      </center>
     </div>
-  )
-
+  );
 }
-
-export default QuizList;
+export default App;
