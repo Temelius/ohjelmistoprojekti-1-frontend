@@ -4,16 +4,12 @@ function RadioKysymys() {
     const [selectedQuiz, setSelectedQuiz] = React.useState([]);
     const [questions, setQuestions] = React.useState([]);
     const [ans, setAns] = React.useState([]);
-    const proxyUrl = 'https://cors-anywhere.herokuapp.com/';
-    const targetUrlGet = 'https://ohjelmistoprojekti-1-backend.herokuapp.com/api/quiz/2'
-    const targetUrlPost = 'https://ohjelmistoprojekti-1-backend.herokuapp.com/api/useranswers'
-
     useEffect(() => {
         getselectedQuiz();
     }, []);
 
     const getselectedQuiz = () => {
-        fetch(proxyUrl + targetUrlGet)
+        fetch('https://ohjelmistoprojekti-1-backend.herokuapp.com/api/quiz/2')
             .then(response => response.json())
             .then(responseData => {
                 setSelectedQuiz(responseData);
@@ -23,8 +19,9 @@ function RadioKysymys() {
     }
 
     const sendAnswer = (ans) => {
-        fetch(proxyUrl + targetUrlPost, {
+        fetch('https://ohjelmistoprojekti-1-backend.herokuapp.com/api/useranswers', {
             method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(ans)
         })
             .catch(err => console.error(err))
