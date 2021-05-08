@@ -1,5 +1,14 @@
 import React, { useEffect, useState } from 'react'
 
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Link
+} from "react-router-dom"
+
+import Quiz from './components/Quiz'
+
 const App = () => {
 
   const [quizList, setQuizList] = useState([])
@@ -24,20 +33,19 @@ const App = () => {
   return (
     <div>
       <h1>Quiz List</h1>
-      <table>
-        <tbody>
-        <tr>
-          <th>Quiz Name</th>
-        </tr>
+      <Router>
+        <div>
           {
             quizList.map((quiz) =>
-              <tr key={quiz.quizId}>
-                <td>{quiz.quizName}</td>
-              </tr>
+              <Link to="/quiz">{quiz.quizName}</Link>
             )
           }
-        </tbody>
-      </table>
+          <Switch>
+            <Route path="/quiz" component={Quiz} />
+            <Route render={() => <h1>Page not found</h1>} />
+          </Switch>
+        </div>
+      </Router>
     </div>
   )
 }
