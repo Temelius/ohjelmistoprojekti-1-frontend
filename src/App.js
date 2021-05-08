@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react'
 
 import Quiz from './components/Quiz'
 
-const App = () => {
+export default function App() {
 
   const [quizList, setQuizList] = useState([])
 
@@ -24,20 +24,22 @@ const App = () => {
       .catch(err => console.error(err))
   }
 
+  const sendQuizId = (props) => {
+   <Quiz quizId={props.value}></Quiz>
+  }
+
+
   return (
     <div>
       <h1>Quiz List</h1>
-        
           {
             quizList.map((quiz) =>
-              <ul key={quiz.quizId}>
-              <li>{quiz.quizName}</li>
-              <li><button onClick={Quiz(quiz.quizId)}/></li>
-              </ul>
+              <div value={quiz.quizId}>
+              <button onClick={sendQuizId(quiz.quizId)}>{quiz.quizName}</button>
+              </div>
             )
           }
     </div>
   )
 }
 
-export default App;
