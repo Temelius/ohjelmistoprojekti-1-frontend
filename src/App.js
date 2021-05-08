@@ -1,11 +1,5 @@
 import React, { useEffect, useState } from 'react'
 
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-  Link
-} from "react-router-dom"
 
 import Quiz from './components/Quiz'
 
@@ -33,19 +27,15 @@ const App = () => {
   return (
     <div>
       <h1>Quiz List</h1>
-      <Router>
-        <div>
+        
           {
             quizList.map((quiz) =>
-              <Link to="/quiz">{quiz.quizName}</Link>
+              <ul key={quiz.quizId}>
+              <li>{quiz.quizName}</li>
+              <li><button onClick={Quiz(quiz.quizId)}/></li>
+              </ul>
             )
           }
-          <Switch>
-            <Route path="/quiz" component={Quiz} />
-            <Route render={() => <h1>Page not found</h1>} />
-          </Switch>
-        </div>
-      </Router>
     </div>
   )
 }
