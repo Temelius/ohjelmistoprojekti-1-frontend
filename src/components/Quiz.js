@@ -1,17 +1,21 @@
 import React, { useEffect, useState } from 'react'
 
 export default function Quiz(props){
-    const [quizId, setQuizId] = React.useState(props.quizId)
-    const [questionList, setQuestionList] = React.useState(props.quizId)
-    const API_URL = 'https://ohjelmistoprojekti-1-backend.herokuapp.com/api/quiz/' + quizId
 
+
+    const [questionList, setQuestionList] = useState([])
+    
+
+    
 
     useEffect(() => {
         getQuizQuestions()
+        console.log(URL)
     }, [])
 
     const getQuizQuestions = () => {
-        fetch(API_URL)
+        const URL = 'https://ohjelmistoprojekti-1-backend.herokuapp.com/api/quiz/' + props.selectedQuiz
+        fetch(URL)
             .then(response => response.json())
             .then(data => {
                 console.log(data)
