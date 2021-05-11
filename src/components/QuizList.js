@@ -14,7 +14,7 @@ export default function App() {
   }, [])
 
   // Get a list of all quizzes
-  const API_URL = 'https://ohjelmistoprojekti-1-backend.herokuapp.com/api/quiz/list'
+  const API_URL = 'http://localhost:8080/api/quiz/list'
 
   const getQuizList = () => {
     fetch(API_URL)

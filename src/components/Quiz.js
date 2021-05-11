@@ -31,7 +31,7 @@ export default function Quiz(props) {
 
     const sendRadioAnswer = () => {
         console.log("Ans:" + JSON.stringify(ans))
-        fetch('https://ohjelmistoprojekti-1-backend.herokuapp.com/api/useranswers', {
+        fetch('http://localhost:8080/api/useranswers', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(ans)
