@@ -5,7 +5,7 @@ export default function Quiz(props) {
 
     const [questionList, setQuestionList] = useState([])
     const [quizz, setQuizz] = useState([])
-    const [ans, setAns] = React.useState({ userAnswerLine: '', answer: {answerid:null}});
+    const [ans, setAns] = React.useState({ userAnswerLine: '', answer: { answerid: null } });
     let qIndex = 0;
 
     useEffect(() => {
@@ -24,9 +24,10 @@ export default function Quiz(props) {
             })
             .catch(err => console.error(err))
     }
-    
+
     const inputChanged = (e) => {
-        setAns({ userAnswerLine: e.target.value, answer: {answerid:e.target.key }});
+        // Get custom attribute->console.log(e.target.getAttribute('data-key'))
+        setAns({ userAnswerLine: e.target.value, answer: { answerid: e.target.getAttribute('data-key') } });
     }
 
     const sendRadioAnswer = () => {
@@ -40,49 +41,50 @@ export default function Quiz(props) {
     }
 
     const radioOrText = (q) => {
-        if (q.questionType === "radio" ){
-            return(
-            <div>
-                        <p>{q.questionline}</p>
-                        {qIndex = qIndex + 1}
-                        <div>{q.answers.map((answer) =>
-                            <div key={answer.answerid}>
-                                <p>
-                                
-                                    <input type="radio"
-                                        onChange={inputChanged}
-                                        value={answer.answerline}
-                                        name={qIndex}
-                                    />
-                                    {answer.answerline}
-                                </p>
-                            </div>
-                        )}
-                        
+        if (q.questionType === "radio") {
+            return (
+                <div>
+                    <p>{q.questionline}</p>
+                    {qIndex = qIndex + 1}
+                    <div>{q.answers.map((answer) =>
+                        <div key={answer.answerid}>
+                            <p>
+
+                                <input type="radio"
+                                    data-key={answer.answerid}
+                                    onChange={inputChanged}
+                                    value={answer.answerline}
+                                    name={qIndex}
+                                />
+                                {answer.answerline}
+                            </p>
                         </div>
-                    
-                        <button onClick={sendRadioAnswer}>Lähetä vastaus</button>
-                    </div>)
-        } 
-        else if (q.questionType === "text"){
-            return(
-            <div>
-                        <p>{q.questionline}</p>
-                        <input type="text" name={qIndex} onChange={inputChanged} />
-                        <button onClick={sendRadioAnswer}>Lähetä vastaus</button>
-                    </div>)
+                    )}
+
+                    </div>
+
+                    <button onClick={sendRadioAnswer}>Lähetä vastaus</button>
+                </div>)
+        }
+        else if (q.questionType === "text") {
+            return (
+                <div>
+                    <p>{q.questionline}</p>
+                    <input type="text" name={qIndex} onChange={inputChanged} />
+                    <button onClick={sendRadioAnswer}>Lähetä vastaus</button>
+                </div>)
         }
     }
 
     return (
         <div>
             <h1>Questions</h1>
-            
+
             {
                 questionList.map((q) =>
-                <div key={q.questionid}>
-                {radioOrText(q)}
-                </div>
+                    <div key={q.questionid}>
+                        {radioOrText(q)}
+                    </div>
                 )
             }
         </div>
