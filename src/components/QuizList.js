@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react'
+import {
+    Link
+  } from "react-router-dom"
 
-
-import Quiz from './components/Quiz'
 
 export default function App() {
 
@@ -25,9 +26,7 @@ export default function App() {
       .catch(err => console.error(err))
   }
 
-  const sendQuizId = () => {
-   <Quiz selectedQuiz = {selectedQuiz}/>
-  }
+  
 
   const inputChanged = (e) => {
     setSelectedQuiz(e.target.value);
@@ -41,17 +40,17 @@ export default function App() {
             quizList.map((quiz) =>
             <div key={quiz.quizId}>
               <input type="radio" name="quizId" value={quiz.quizId} onChange={inputChanged}></input>
-              <text> {quiz.quizName}</text>
+              <p> {quiz.quizName}</p>
           </div>
             )
             
           }
           <br/>
-          <button onClick={sendQuizId}>Vastaa kyselyyn</button>
+          <Link to={`/Quiz/${selectedQuiz}`}>Select Quiz</Link>
           <br/>
           <br/>
           <br/>
-          <text>{selectedQuiz}</text>
+          
     </div>
   )
 }
