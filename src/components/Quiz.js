@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+import '../App.css';
 
 export default function Quiz(props) {
 
@@ -58,10 +59,10 @@ export default function Quiz(props) {
 
     const radioOrText = (q) => {
         if (q.questionType === "radio") {
+            qIndex = qIndex + 1
             return (
                 <div>
                     <p>{q.questionline}</p>
-                    {qIndex = qIndex + 1}
                     <div>{q.answers.map((answer) =>
                         <div key={answer.answerid}>
                             <p>
@@ -79,10 +80,11 @@ export default function Quiz(props) {
 
                     </div>
 
-                    <button onClick={sendRadioAnswer}>Lähetä vastaus</button>
+                    <button class="Button-style" onClick={sendRadioAnswer}>Lähetä vastaus</button>
                 </div>)
         }
         else if (q.questionType === "text") {
+            qIndex = qIndex + 1
             return (
                 <div>
                     <p>{q.questionline}</p>
@@ -92,14 +94,16 @@ export default function Quiz(props) {
                     name={qIndex} 
                     onChange={textInputChanged} 
                     />
-                    <button onClick={sendTextAnswer}>Lähetä vastaus</button>
+                    <br/>
+                    
+                    <button class="Button-style" onClick={sendTextAnswer}>Lähetä vastaus</button>
                 </div>)
         }
     }
 
     return (
         <div>
-            <h1>Questions</h1>
+            <h1 class="header">Kysymykset</h1>
 
             {
                 questionList.map((q) =>

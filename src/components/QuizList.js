@@ -3,11 +3,11 @@ import {
     Link
   } from "react-router-dom"
 
+  import '../App.css';
 
 export default function App() {
 
   const [quizList, setQuizList] = useState([])
-  const [selectedQuiz, setSelectedQuiz] = useState("")
 
   useEffect(() => {
       getQuizList()
@@ -26,31 +26,18 @@ export default function App() {
       .catch(err => console.error(err))
   }
 
-  
-
-  const inputChanged = (e) => {
-    setSelectedQuiz(e.target.value);
-}
-
-
   return (
     <div>
-      <h1>Quiz List</h1>
+      <h1 class="header">Kyselyt</h1>
           {
             quizList.map((quiz) =>
             <div key={quiz.quizId}>
-              <input type="radio" name="quizId" value={quiz.quizId} onChange={inputChanged}></input>
-              <p> {quiz.quizName}</p>
+              <Link to={`/Quiz/${quiz.quizId}`}><button value={quiz.quizId} class="Button-style">{quiz.quizName}</button></Link>
+              <br/>
+              <br/>
           </div>
             )
-            
-          }
-          <br/>
-          <Link to={`/Quiz/${selectedQuiz}`}>Select Quiz</Link>
-          <br/>
-          <br/>
-          <br/>
-          
+          }       
     </div>
   )
 }

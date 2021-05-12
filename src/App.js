@@ -15,12 +15,10 @@ import './App.css';
 function App() {
   return (
     <div className="App">
-      <h1>Kiperätkysymykset oy</h1>
+      <h1 class="App-header">KYSELYAPP</h1>
       <Router>
         <div>
-          <Link to="/">QuizList</Link>{' '}
-          
-         
+          <Link  to="/"><button class="Button-style">Etusivulle</button></Link>{' '}
           <Switch>
             <Route exact path="/" component={QuizList} />
             <Route path="/Quiz/:id" component={Quiz} />
