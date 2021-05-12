@@ -6,6 +6,7 @@ export default function Quiz(props) {
     const [questionList, setQuestionList] = useState([])
     const [quizz, setQuizz] = useState([])
     const [ans, setAns] = React.useState({ userAnswerLine: '', answer: { answerid: null } });
+    const [textAns, setTextAns] = React.useState({ answerline: '', question: { questionid: null } });
     let qIndex = 0;
 
     useEffect(() => {
@@ -14,7 +15,7 @@ export default function Quiz(props) {
     }, [])
 
     const getQuizQuestions = () => {
-        const URL = 'https://ohjelmistoprojekti-1-backend.herokuapp.com/api/quiz/' + props.match.params.id
+        const URL = 'http://localhost:8080/api/quiz/' + props.match.params.id
         fetch(URL)
             .then(response => response.json())
             .then(data => {
@@ -36,6 +37,21 @@ export default function Quiz(props) {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(ans)
+        })
+            .catch(err => console.error(err))
+    }
+
+    const textInputChanged = (e) => {
+        // Get custom attribute->console.log(e.target.getAttribute('data-key'))
+        setTextAns({ answerline: e.target.value, question: { questionid: e.target.getAttribute('data-key') } });
+    }
+
+    const sendTextAnswer = () => {
+        console.log("Ans:" + JSON.stringify(ans))
+        fetch('http://localhost:8080/api/answers', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(textAns)
         })
             .catch(err => console.error(err))
     }
@@ -70,8 +86,13 @@ export default function Quiz(props) {
             return (
                 <div>
                     <p>{q.questionline}</p>
-                    <input type="text" name={qIndex} onChange={inputChanged} />
-                    <button onClick={sendRadioAnswer}>Lähetä vastaus</button>
+                    <input 
+                    data-key={q.questionid}
+                    type="text" 
+                    name={qIndex} 
+                    onChange={textInputChanged} 
+                    />
+                    <button onClick={sendTextAnswer}>Lähetä vastaus</button>
                 </div>)
         }
     }
