@@ -28,11 +28,15 @@ export default function App() {
 
   return (
     <div>
-      <h1 class="header">Kyselyt</h1>
+      <h1 className="header">Kyselyt</h1>
       {
         quizList.map((quiz) =>
           <div key={quiz.quizId}>
-            <Link to={`/Quiz/${quiz.quizId}`}><button value={quiz.quizId} class="Button-style">{quiz.quizName}</button></Link>
+            <Link to={`/quiz/${quiz.quizId}`}>
+              <button value={quiz.quizId} className="btn btn-outline-primary">
+                {quiz.quizName}
+              </button>
+            </Link>
             <br />
             <br />
           </div>

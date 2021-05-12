@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+import { Link } from 'react-router-dom';
 import '../App.css';
 
 export default function Quiz(props) {
@@ -57,16 +58,12 @@ export default function Quiz(props) {
             .catch(err => console.error(err))
     }
 
-    const showAnswers = (q) => {
-
-    }
-
     const radioOrText = (q) => {
         if (q.questionType === "radio") {
             qIndex = qIndex + 1
             return (
                 <div>
-                    <p>{q.questionline}</p>
+                    <h4>{q.questionline}</h4>
                     <div>{q.answers.map((answer) =>
                         <div key={answer.answerid}>
                             <p>
@@ -84,14 +81,16 @@ export default function Quiz(props) {
 
                     </div>
 
-                    <button class="Button-style" onClick={sendRadioAnswer}>Vastaa</button>
+                    <button className="btn btn-outline-primary" onClick={sendRadioAnswer}>Vastaa</button>
+                    <br />
+                    <br />
                 </div>)
         }
         else if (q.questionType === "text") {
             qIndex = qIndex + 1
             return (
                 <div>
-                    <p>{q.questionline}</p>
+                    <h4>{q.questionline}</h4>
                     <input
                         data-key={q.questionid}
                         type="text"
@@ -99,15 +98,18 @@ export default function Quiz(props) {
                         onChange={textInputChanged}
                     />
                     <br />
+                    <br />
 
-                    <button class="Button-style" onClick={sendTextAnswer}>Vastaa</button>
+                    <button className="btn btn-outline-primary" onClick={sendTextAnswer}>Vastaa</button>
+                    <br />
+                    <br />
                 </div>)
         }
     }
 
     return (
         <div>
-            <h1 class="header">Kysymykset</h1>
+            <h1 className="header">Kysymykset</h1>
 
             {
                 questionList.map((q) =>
@@ -119,6 +121,7 @@ export default function Quiz(props) {
             }
 
             <br />
+            <Link to={`/results/${props.match.params.id}`}>TARKASTELE TULOKSIA!</Link>
         </div>
     )
 }

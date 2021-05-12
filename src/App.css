@@ -1,37 +1,54 @@
+
+.no-gutters {
+  padding-left: 0;
+  padding-right: 0;
+}
+
+.navbar {
+  background-color: #39603D;
+  min-height: 15vh;
+}
+.navbar-brand {
+  font-size: calc(15px + 3vmin);
+  color: #DADED4;
+}
+.navbar-brand:hover {
+  text-decoration: none;
+  color: #DADED4;
+}
+
 .App {
   text-align: center;
 }
 body{
-  background-color: rgb(255, 145, 0);
+  font-family: 'Poppins', sans-serif;
+  background-color: #DADED4;
 }
 .App-header {
-  background-color: #33691e;
   min-height: 15vh;
-  display: flex;
-  flex-direction: column;
+  /* display: inline-block; */
+  /*flex-direction: column;
   align-items: center;
-  justify-content: center;
+  justify-content: center; */
   font-size: calc(10px + 2vmin);
   color: rgb(255, 145, 0);
   font-style: italic;
   margin-top: 0;
 }
 
+.btn-outline-primary {
+  color: #3C403D;
+  border-color: #3C403D;
+  font-weight: bold;
+}
 
-
-.Button-style {
-background-color: #33691e;
-color: rgb(255, 145, 0);
-border-radius: 20;
-border-color: rgb(255, 145, 0);
-font-weight: bold;
-font-style: italic;
-min-height: 3vh;
-min-width: 6vh;
+.btn-outline-primary:hover {
+  background-color: #3C403D;
+  border-color: #3C403D;
 }
 
 .header {
   font-size: 10;
-  color: #33691e;
+  color: #3C403D;
   font-style: italic;
 } 
