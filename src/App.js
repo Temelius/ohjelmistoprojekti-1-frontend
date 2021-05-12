@@ -11,18 +11,22 @@ import {
 
 import './App.css';
 
+import Logo from './logo.svg';
 
 function App() {
   return (
     <div className="App">
-      <h1 class="App-header">KYSELYAPP</h1>
+      <div class="App-header">
+       <a href="/">
+         <img src={Logo}></img>
+         </a>
+      </div>
       <Router>
         <div>
-          <Link  to="/"><button class="Button-style">Etusivulle</button></Link>{' '}
           <Switch>
             <Route exact path="/" component={QuizList} />
             <Route path="/Quiz/:id" component={Quiz} />
-            <Route render={() => <h1>Page not found</h1>} />
+            <Route render={() => <h1>Sivua ei löytynyt</h1>} />
           </Switch>
         </div>
       </Router>

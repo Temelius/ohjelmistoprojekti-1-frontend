@@ -9,7 +9,7 @@ export default function Quiz(props) {
     const [ans, setAns] = React.useState({ userAnswerLine: '', answer: { answerid: null } });
     const [textAns, setTextAns] = React.useState({ answerline: '', question: { questionid: null } });
     let qIndex = 0;
-
+    
     useEffect(() => {
         getQuizQuestions()
         console.log(URL)
@@ -57,6 +57,10 @@ export default function Quiz(props) {
             .catch(err => console.error(err))
     }
 
+    const showAnswers = (q) => {
+
+    }
+
     const radioOrText = (q) => {
         if (q.questionType === "radio") {
             qIndex = qIndex + 1
@@ -80,7 +84,7 @@ export default function Quiz(props) {
 
                     </div>
 
-                    <button class="Button-style" onClick={sendRadioAnswer}>Lähetä vastaus</button>
+                    <button class="Button-style" onClick={sendRadioAnswer}>Vastaa</button>
                 </div>)
         }
         else if (q.questionType === "text") {
@@ -88,15 +92,15 @@ export default function Quiz(props) {
             return (
                 <div>
                     <p>{q.questionline}</p>
-                    <input 
-                    data-key={q.questionid}
-                    type="text" 
-                    name={qIndex} 
-                    onChange={textInputChanged} 
+                    <input
+                        data-key={q.questionid}
+                        type="text"
+                        name={qIndex}
+                        onChange={textInputChanged}
                     />
-                    <br/>
-                    
-                    <button class="Button-style" onClick={sendTextAnswer}>Lähetä vastaus</button>
+                    <br />
+
+                    <button class="Button-style" onClick={sendTextAnswer}>Vastaa</button>
                 </div>)
         }
     }
@@ -109,9 +113,12 @@ export default function Quiz(props) {
                 questionList.map((q) =>
                     <div key={q.questionid}>
                         {radioOrText(q)}
+                        
                     </div>
                 )
             }
+
+            <br />
         </div>
     )
 }
