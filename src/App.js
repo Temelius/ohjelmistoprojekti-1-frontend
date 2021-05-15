@@ -20,10 +20,10 @@ import Logo from './logo.svg';
 function App() {
   return (
     <div className="container-fluid no-gutters">
-      <nav class="navbar">
-        <div class="container-fluid">
-          <a class="navbar-brand mx-auto" href="/">
-            <img src={Logo} alt="" width="60" height="60" class="d-inline-block align-text-top"/>
+      <nav className="navbar">
+        <div className="container-fluid">
+          <a className="navbar-brand mx-auto" href="/">
+            <img src={Logo} alt="" width="60" height="60" className="d-inline-block align-text-top"/>
               KyselyÄppi
           </a>
         </div>
@@ -40,6 +40,14 @@ function App() {
             </Switch>
           </div>
         </Router>
+      </div>
+
+      <div className="footer">
+          <h1>@KyselyÄppi - 2021</h1>
+          <a href="https://github.com/Temelius/ohjelmistoprojekti-1-frontend"
+              className="footer-link">
+            GitHub
+          </a>
       </div>
     </div>
   );
