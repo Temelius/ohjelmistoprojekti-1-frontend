@@ -26,7 +26,15 @@ const Results = (props) => {
     }
 
     const radioOrText = (question) => {
+        const piirakkaData = []
         if (question.questionType === "radio") {
+            question.answers.forEach(answer => {
+                piirakkaData.push({
+                    answerline: answer.answerline, 
+                    answercount: answer.userAnswers.length
+                })
+                console.log(piirakkaData)
+            });
             return (
                 <div>
                     <h4>{question.questionline}</h4>
@@ -35,6 +43,7 @@ const Results = (props) => {
                             question.answers.map((answer) =>
                                 <div key={answer.answerid}>
                                     <p>{answer.answerline} - {answer.userAnswers.length}</p>
+
                                 </div>
                             )
                         }
@@ -57,6 +66,7 @@ const Results = (props) => {
                 </div>
             )
         }
+        console.log(piirakkaData)
     }
 
     return (
