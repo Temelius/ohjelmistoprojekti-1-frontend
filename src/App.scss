@@ -1,0 +1,69 @@
+
+$primary-font: 'Poppins', sans-serif;
+
+$primary-color: #39603D;
+$background: #DADED4;
+$secondary-color: #3C403D;
+
+.no-gutters {
+    padding-left: 0;
+    padding-right: 0;
+  }
+  
+  .navbar {
+    background-color: $primary-color;
+    min-height: 15vh;
+    &-brand {
+        font-size: calc(15px + 3vmin);
+        color: $background;
+        &:hover {
+            text-decoration: none;
+            color: $background;
+        }
+    }
+  }
+.chart {
+  display: flex;
+  justify-content: center;
+}
+
+  .footer {
+      background-color: $primary-color;
+      height: 15vh;
+      padding: 25px 0;
+      margin: 25px 0 0 0;
+      text-align: center;
+      color: $background;
+      &-link {
+          text-decoration: none;
+          color: $background;
+          &:hover {
+              color: $secondary-color;
+          }
+      }
+  }
+  
+  .App {
+    text-align: center;
+    min-height: 65vh;
+  }
+  body{
+    font-family: $primary-font;
+    background-color: $background;
+  }
+  
+  .btn-outline-primary {
+    color: $secondary-color;
+    border-color: $secondary-color;
+    font-weight: bold;
+    &:hover {
+        background-color: $secondary-color;
+        border-color: $secondary-color;
+    }
+  }
+  
+  .header {
+    color: $secondary-color;
+    margin: 50px 0;
+    font-weight: bold;
+  } 

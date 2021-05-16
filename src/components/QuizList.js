@@ -1,16 +1,16 @@
 import React, { useEffect, useState } from 'react'
 import {
-    Link
-  } from "react-router-dom"
+  Link
+} from "react-router-dom"
 
+import '../App.css';
 
 export default function App() {
 
   const [quizList, setQuizList] = useState([])
-  const [selectedQuiz, setSelectedQuiz] = useState("")
 
   useEffect(() => {
-      getQuizList()
+    getQuizList()
   }, [])
 
   // Get a list of all quizzes
@@ -20,37 +20,28 @@ export default function App() {
     fetch(API_URL)
       .then(response => response.json())
       .then(data => {
-        console.log(data)
+        // console.log(data)
         setQuizList(data)
       })
       .catch(err => console.error(err))
   }
 
-  
-
-  const inputChanged = (e) => {
-    setSelectedQuiz(e.target.value);
-}
-
-
   return (
     <div>
-      <h1>Quiz List</h1>
-          {
-            quizList.map((quiz) =>
-            <div key={quiz.quizId}>
-              <input type="radio" name="quizId" value={quiz.quizId} onChange={inputChanged}></input>
-              <p> {quiz.quizName}</p>
+      <h1 className="header">Kyselyt</h1>
+      {
+        quizList.map((quiz) =>
+          <div key={quiz.quizId}>
+            <Link to={`/quiz/${quiz.quizId}`}>
+              <button value={quiz.quizId} className="btn btn-outline-primary">
+                {quiz.quizName}
+              </button>
+            </Link>
+            <br />
+            <br />
           </div>
-            )
-            
-          }
-          <br/>
-          <Link to={`/Quiz/${selectedQuiz}`}>Select Quiz</Link>
-          <br/>
-          <br/>
-          <br/>
-          
+        )
+      }
     </div>
   )
 }
