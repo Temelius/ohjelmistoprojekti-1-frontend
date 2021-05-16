@@ -6,7 +6,6 @@ export default function Quiz(props) {
 
 
     const [questionList, setQuestionList] = useState([])
-    const [quizz, setQuizz] = useState([])
     const [ans, setAns] = React.useState({ userAnswerLine: '', answer: { answerid: null } });
     const [textAns, setTextAns] = React.useState({ answerline: '', question: { questionid: null } });
     let qIndex = 0;
@@ -23,7 +22,6 @@ export default function Quiz(props) {
             .then(data => {
                 console.log(data)
                 setQuestionList(data.question)
-                setQuizz(data)
             })
             .catch(err => console.error(err))
     }
@@ -63,7 +61,7 @@ export default function Quiz(props) {
             qIndex = qIndex + 1
             return (
                 <div>
-                    <h4>{q.questionline}</h4>
+                    <h4 className="header">{q.questionline}</h4>
                     <div>{q.answers.map((answer) =>
                         <div key={answer.answerid}>
                             <p>
@@ -90,7 +88,7 @@ export default function Quiz(props) {
             qIndex = qIndex + 1
             return (
                 <div>
-                    <h4>{q.questionline}</h4>
+                    <h4 className="header">{q.questionline}</h4>
                     <input
                         data-key={q.questionid}
                         type="text"
@@ -121,7 +119,7 @@ export default function Quiz(props) {
             }
 
             <br />
-            <Link to={`/results/${props.match.params.id}`}>TARKASTELE TULOKSIA!</Link>
+            <Link to={`/results/${props.match.params.id}`}><button className="btn btn-outline-primary">Tarkastele tuloksia</button></Link>
         </div>
     )
 }

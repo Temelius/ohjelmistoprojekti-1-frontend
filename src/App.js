@@ -8,7 +8,6 @@ import {
   BrowserRouter as Router,
   Switch,
   Route,
-  Link
 } from "react-router-dom"
 
 // Styles
@@ -43,7 +42,7 @@ function App() {
       </div>
 
       <div className="footer">
-          <h1>@KyselyÄppi - 2021</h1>
+          <h1>KyselyÄppi - 2021</h1>
           <a href="https://github.com/Temelius/ohjelmistoprojekti-1-frontend"
               className="footer-link">
             GitHub
