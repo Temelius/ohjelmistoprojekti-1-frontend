@@ -4,23 +4,33 @@ import '../App.css';
 
 export default function Quiz(props) {
 
+    // quizId from props
+    const quizId = props.match.params.id;
 
+    // List of questions
     const [questionList, setQuestionList] = useState([])
-    const [ans, setAns] = React.useState({ userAnswerLine: '', answer: { answerid: null } });
-    const [textAns, setTextAns] = React.useState({ answerline: '', question: { questionid: null } });
+
+    // Answer states
+    const [ans, setAns] = React.useState(
+        { userAnswerLine: '', answer: { answerid: null } }
+    );
+    const [textAns, setTextAns] = React.useState(
+        { answerline: '', question: { questionid: null } }
+    );
+
+    // Radio group index
     let qIndex = 0;
     
     useEffect(() => {
         getQuizQuestions()
-        console.log(URL)
     }, [])
 
     const getQuizQuestions = () => {
-        const URL = 'http://localhost:8080/api/quiz/' + props.match.params.id
-        fetch(URL)
+        const API_URL = `http://localhost:8080/api/quiz/${quizId}`
+        fetch(API_URL)
             .then(response => response.json())
             .then(data => {
-                console.log(data)
+                //console.log(data)
                 setQuestionList(data.question)
             })
             .catch(err => console.error(err))
@@ -32,11 +42,23 @@ export default function Quiz(props) {
     }
 
     const sendRadioAnswer = () => {
-        console.log("Ans:" + JSON.stringify(ans))
+        // Send radio answer to server
+        //console.log("Ans:" + JSON.stringify(ans))
         fetch('http://localhost:8080/api/useranswers', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(ans)
+        })
+            .catch(err => console.error(err))
+    }
+
+    const sendTextAnswer = () => {
+        // Send text answer to server
+        //console.log("Ans:" + JSON.stringify(ans))
+        fetch('http://localhost:8080/api/answers', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(textAns)
         })
             .catch(err => console.error(err))
     }
@@ -46,17 +68,10 @@ export default function Quiz(props) {
         setTextAns({ answerline: e.target.value, question: { questionid: e.target.getAttribute('data-key') } });
     }
 
-    const sendTextAnswer = () => {
-        console.log("Ans:" + JSON.stringify(ans))
-        fetch('http://localhost:8080/api/answers', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(textAns)
-        })
-            .catch(err => console.error(err))
-    }
 
     const radioOrText = (q) => {
+        // Render different things if questionType 
+        //  is radio or text type
         if (q.questionType === "radio") {
             qIndex = qIndex + 1
             return (
@@ -119,7 +134,11 @@ export default function Quiz(props) {
             }
 
             <br />
-            <Link to={`/results/${props.match.params.id}`}><button className="btn btn-outline-primary">Tarkastele tuloksia</button></Link>
+            <Link to={`/results/${quizId}`}>
+                <button className="btn btn-outline-primary">
+                    Tarkastele tuloksia
+                </button>
+            </Link>
         </div>
     )
 }

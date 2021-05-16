@@ -4,7 +4,9 @@ import '../App.css';
 
 const Results = (props) => {
 
+    // quizId from props
     const quizId = props.match.params.id
+
     const [questionList, setQuestionList] = useState([])
     const [quiz, setQuiz] = useState([])
 
@@ -14,11 +16,11 @@ const Results = (props) => {
     }, [])
 
     const getQuizQuestions = () => {
-        const URL = `http://localhost:8080/api/quiz/${quizId}`
-        fetch(URL)
+        const API_URL = `http://localhost:8080/api/quiz/${quizId}`
+        fetch(API_URL)
             .then(response => response.json())
             .then(data => {
-                console.log(data.question)
+                //console.log(data.question)
                 setQuestionList(data.question)
                 setQuiz(data)
             })
@@ -26,13 +28,18 @@ const Results = (props) => {
     }
 
     const radioOrText = (question) => {
+        // Create pieChart array
         const piirakkaData = [['AnswerLine', 'AnswerCount']]
+
+        // Render different things if questionType 
+        //  is radio or text type
         if (question.questionType === "radio") {
+            // Loop through answers and push data to pieChart array
             question.answers.forEach(answer => {
                 piirakkaData.push(
                     [answer.answerline, answer.userAnswers.length]
                     )
-                console.log(piirakkaData)
+                //console.log(piirakkaData)
             });
             return (
                 <div>
@@ -47,7 +54,7 @@ const Results = (props) => {
                             )*/
                         }
                         <div className="chart">
-
+                        
                         <Chart
                             width={'500px'}
                             height={'300px'}

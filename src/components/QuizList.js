@@ -20,7 +20,7 @@ export default function App() {
     fetch(API_URL)
       .then(response => response.json())
       .then(data => {
-        console.log(data)
+        // console.log(data)
         setQuizList(data)
       })
       .catch(err => console.error(err))
