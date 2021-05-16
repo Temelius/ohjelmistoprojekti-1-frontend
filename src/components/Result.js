@@ -16,7 +16,7 @@ const Results = (props) => {
     }, [])
 
     const getQuizQuestions = () => {
-        const API_URL = `http://localhost:8080/api/quiz/${quizId}`
+        const API_URL = `https://ohjelmistoprojekti-1-backend.herokuapp.com/api/quiz/${quizId}`
         fetch(API_URL)
             .then(response => response.json())
             .then(data => {
@@ -54,7 +54,7 @@ const Results = (props) => {
                             )*/
                         }
                         <div className="chart">
-                        
+
                         <Chart
                             width={'500px'}
                             height={'300px'}

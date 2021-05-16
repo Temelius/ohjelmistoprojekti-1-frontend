@@ -26,7 +26,7 @@ export default function Quiz(props) {
     }, [])
 
     const getQuizQuestions = () => {
-        const API_URL = `http://localhost:8080/api/quiz/${quizId}`
+        const API_URL = `https://ohjelmistoprojekti-1-backend.herokuapp.com/api/quiz/${quizId}`
         fetch(API_URL)
             .then(response => response.json())
             .then(data => {
@@ -44,7 +44,7 @@ export default function Quiz(props) {
     const sendRadioAnswer = () => {
         // Send radio answer to server
         //console.log("Ans:" + JSON.stringify(ans))
-        fetch('http://localhost:8080/api/useranswers', {
+        fetch('https://ohjelmistoprojekti-1-backend.herokuapp.com/api/useranswers', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(ans)
@@ -55,7 +55,7 @@ export default function Quiz(props) {
     const sendTextAnswer = () => {
         // Send text answer to server
         //console.log("Ans:" + JSON.stringify(ans))
-        fetch('http://localhost:8080/api/answers', {
+        fetch('https://ohjelmistoprojekti-1-backend.herokuapp.com/api/answers', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(textAns)
