@@ -22,11 +22,16 @@ $secondary-color: #3C403D;
         }
     }
   }
+.chart {
+  display: flex;
+  justify-content: center;
+}
 
   .footer {
       background-color: $primary-color;
       height: 15vh;
       padding: 25px 0;
+      margin: 25px 0 0 0;
       text-align: center;
       color: $background;
       &-link {
@@ -58,7 +63,7 @@ $secondary-color: #3C403D;
   }
   
   .header {
-    font-size: 10;
     color: $secondary-color;
     margin: 50px 0;
+    font-weight: bold;
   } 

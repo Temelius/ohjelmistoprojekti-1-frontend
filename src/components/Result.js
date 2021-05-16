@@ -26,13 +26,12 @@ const Results = (props) => {
     }
 
     const radioOrText = (question) => {
-        const piirakkaData = []
+        const piirakkaData = [['AnswerLine', 'AnswerCount']]
         if (question.questionType === "radio") {
             question.answers.forEach(answer => {
-                piirakkaData.push({
-                    answerline: answer.answerline, 
-                    answercount: answer.userAnswers.length
-                })
+                piirakkaData.push(
+                    [answer.answerline, answer.userAnswers.length]
+                    )
                 console.log(piirakkaData)
             });
             return (
@@ -40,26 +39,56 @@ const Results = (props) => {
                     <h4 className="header">{question.questionline}</h4>
                     <div>
                         {
-                            question.answers.map((answer) =>
+                            /*question.answers.map((answer) =>
                                 <div key={answer.answerid}>
                                     <p>{answer.answerline} - {answer.userAnswers.length}</p>
 
                                 </div>
-                            )
+                            )*/
                         }
-                        
+                        <div className="chart">
+
+                        <Chart
+                            width={'500px'}
+                            height={'300px'}
+                            chartType="PieChart"
+                            loader={<div>Loading Chart</div>}
+                            data={piirakkaData}
+                            options={{
+                                backgroundColor: '#DADED4',
+                                colors:[
+                                    '#E27D60',
+                                    '#95CBCB',
+                                    '#E8A87C',
+                                    '#C38D9E',
+                                    '#41B3A3',
+                                    '#90cbf9',
+                                    '#869edc',
+                                    '#dfa9d6',
+                                    '#f7c6d2',
+                                    '#fddccb',
+                                    '#90C978',
+                                    '#BFE3DA',
+                                    '#C0DDBE',
+                                    '#FEFFF7',
+                                    '#FFBA67'
+                                ]
+                            }}
+                            rootProps={{ 'data-testid': '1' }}
+                            />
+                        </div>
                     </div>
                 </div>
             )
-            
+
         } else if (question.questionType === "text") {
             return (
-                <div class="container">
+                <div className="container">
                     <h4 className="header">{question.questionline}</h4>
-                    <div class="row">
+                    <div className="row">
                         {
                             question.answers.map((answer) =>
-                                <div class="col-sm" key={answer.answerid}>
+                                <div className="col-sm" key={answer.answerid}>
                                     <p className="textResultsItem">{answer.answerline}</p>
                                 </div>
                             )
@@ -68,8 +97,8 @@ const Results = (props) => {
                 </div>
             )
         }
-        
-    
+
+
     }
 
     return (
