@@ -42,3 +42,14 @@ Ohjeet: [NPM](https://www.npmjs.com/get-npm)
 
 # Käyttö
 
+Etusivulla voi valita kyselyn, johon haluaa vastata. Headerissa linkki etusivulle sekä logo.
+
+ <img src="./src/readme_photos/etusivu.JPG" width="900" alt="etusivu kuva"/>
+
+Kyselysivulla kysymyksiin voi vastata yksi kerrallaan ja käyttäjä saa ilmoituksen jokaisesta onnistuneesta vastaustapahtumasta. Sivun alhaalla nappi, josta pääsee näkemään vastauksia.
+
+ <img src="./src/readme_photos/kysely.JPG" width="900" alt="kysely kuva"/>
+ 
+Vastaussivulla nähdään kyselyyn vastattuja vastauksia. Radio muotoisista kysymyksistä näytetään Pie Chart ja teksti muotoisista kysymyksistä näytetään vastauksia sivulla listattuna.
+
+ <img src="./src/readme_photos/vastaukset.JPG" width="900" alt="kuva vastauksista"/>
