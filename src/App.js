@@ -14,6 +14,7 @@ import {
 // Styles
 import './App.css';
 import Logo from './logo.svg';
+import { ToastProvider } from 'react-toast-notifications';
 // import 'bootstrap/dist/css/bootstrap.min.css'
 // import 'bootstrap/dist/js/bootstrap.bundle'
 
@@ -29,7 +30,8 @@ function App() {
         </div>
       </nav>
       <div className="App">
-
+      {/* provider for toast notifications */}
+      <ToastProvider autoDismiss={true}>
         <Router>
           <div>
             <Switch>
@@ -40,6 +42,7 @@ function App() {
             </Switch>
           </div>
         </Router>
+      </ToastProvider>
       </div>
 
       <div className="footer">

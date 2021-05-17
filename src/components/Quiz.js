@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom';
+import { useToasts } from 'react-toast-notifications'
 import '../App.css';
 
 export default function Quiz(props) {
@@ -17,6 +18,8 @@ export default function Quiz(props) {
     const [textAns, setTextAns] = React.useState(
         { answerline: '', question: { questionid: null } }
     );
+
+    const { addToast } = useToasts()
 
     // Radio group index
     let qIndex = 0;
@@ -41,26 +44,44 @@ export default function Quiz(props) {
         setAns({ userAnswerLine: e.target.value, answer: { answerid: e.target.getAttribute('data-key') } });
     }
 
-    const sendRadioAnswer = () => {
+    async function sendRadioAnswer() {
         // Send radio answer to server
         //console.log("Ans:" + JSON.stringify(ans))
-        fetch('https://ohjelmistoprojekti-1-backend.herokuapp.com/api/useranswers', {
+        const response = await fetch('https://ohjelmistoprojekti-1-backend.herokuapp.com/api/useranswers', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(ans)
-        })
-            .catch(err => console.error(err))
+        }).catch(err => console.error(err))
+
+        if (response.status === 200) {
+            addToast(`Vastaus "${ans.userAnswerLine}" tallennettu`, {
+                appearance: 'success',
+            })
+        } else {
+            addToast('Virhe vastauksen tallennuksessa', {
+                appearance: 'error'
+            })
+        }
     }
 
-    const sendTextAnswer = () => {
+    async function sendTextAnswer () {
         // Send text answer to server
         //console.log("Ans:" + JSON.stringify(ans))
-        fetch('https://ohjelmistoprojekti-1-backend.herokuapp.com/api/answers', {
+        const response = await fetch('https://ohjelmistoprojekti-1-backend.herokuapp.com/api/answers', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(textAns)
-        })
-            .catch(err => console.error(err))
+        }).catch(err => console.error(err))
+
+        if (response.status === 200) {
+            addToast(`Vastaus "${textAns.answerline}" tallennettu`, {
+                appearance: 'success',
+            })
+        } else {
+            addToast('Virhe vastauksen tallennuksessa', {
+                appearance: 'error'
+            })
+        }
     }
 
     const textInputChanged = (e) => {
