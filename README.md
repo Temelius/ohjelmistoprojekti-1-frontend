@@ -5,7 +5,9 @@ Haaga-Helian ohjelmistoprojekti 1 kurssin front end puoli.
 * [react-router](https://reactrouter.com/web/guides/quick-start)
 * [react-toast-notifications](https://github.com/jossmac/react-toast-notifications)
 * [react-google-charts](https://react-google-charts.com/)
+* [react-loader-spinner](https://www.npmjs.com/package/react-loader-spinner)
 * [bootstrap 5.0](https://getbootstrap.com/docs/5.0/getting-started/introduction/)
+
 
 
 * [BACKEND](https://github.com/Temelius/ohjelmistoprojekti-1-backend)
