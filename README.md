@@ -32,11 +32,11 @@ Ohjeet: [NPM](https://www.npmjs.com/get-npm)
    ```sh
    git clone https://github.com/Temelius/ohjelmistoprojekti-1-frontend.git
    ```
-### Asenna NPM paketit
+### Asenna paketit
    ```sh
    yarn install
    ```
-### Käynnistä npm
+### Käynnistä yarn
    ```sh
    yarn start
    ```
