@@ -3,11 +3,15 @@ import {
   Link
 } from "react-router-dom"
 
+import LoadingSpinner from './LoadingSpinner'
+
 import '../App.css';
 
 export default function App() {
 
   const [quizList, setQuizList] = useState([])
+
+  const [isLoading, setLoading] = useState(true)
 
   useEffect(() => {
     getQuizList()
@@ -22,8 +26,19 @@ export default function App() {
       .then(data => {
         // console.log(data)
         setQuizList(data)
+        setLoading(false)
       })
       .catch(err => console.error(err))
+  }
+  
+  // If page is still loading, show user a Loading indicator
+  if (isLoading) {
+    return (
+      <div>
+        <h1 className="header">Kyselyt</h1>
+        <LoadingSpinner />
+      </div>
+    )
   }
 
   return (

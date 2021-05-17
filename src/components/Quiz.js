@@ -1,6 +1,9 @@
 import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom';
 import { useToasts } from 'react-toast-notifications'
+
+import LoadingSpinner from './LoadingSpinner'
+
 import '../App.css';
 
 export default function Quiz(props) {
@@ -19,6 +22,8 @@ export default function Quiz(props) {
         { answerline: '', question: { questionid: null } }
     );
 
+    const [isLoading, setLoading] = useState(true)
+
     const { addToast } = useToasts()
 
     // Radio group index
@@ -28,15 +33,24 @@ export default function Quiz(props) {
         getQuizQuestions()
     }, [])
 
+    
     const getQuizQuestions = () => {
         const API_URL = `https://ohjelmistoprojekti-1-backend.herokuapp.com/api/quiz/${quizId}`
         fetch(API_URL)
-            .then(response => response.json())
-            .then(data => {
-                //console.log(data)
-                setQuestionList(data.question)
-            })
-            .catch(err => console.error(err))
+        .then(response => response.json())
+        .then(data => {
+            //console.log(data)
+            setQuestionList(data.question)
+            setLoading(false)
+        })
+        .catch(err => console.error(err))
+    }
+    
+    // If page is still loading, show user a Loading indicator
+    if (isLoading) {
+        return (
+            <LoadingSpinner />
+        )
     }
 
     const inputChanged = (e) => {

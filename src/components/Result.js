@@ -1,5 +1,8 @@
 import React, { useState, useEffect } from 'react'
 import Chart from "react-google-charts";
+
+import LoadingSpinner from './LoadingSpinner'
+
 import '../App.css';
 
 const Results = (props) => {
@@ -10,28 +13,38 @@ const Results = (props) => {
     const [questionList, setQuestionList] = useState([])
     const [quiz, setQuiz] = useState([])
 
+    const [isLoading, setLoading] = useState(true)
 
     useEffect(() => {
         getQuizQuestions()
 
         componentDidMount()
     }, [])
+
     
     // Scroll to top when page loads
     const componentDidMount = () => {
         window.scrollTo(0, 0)
     }
-
+    
     const getQuizQuestions = () => {
         const API_URL = `https://ohjelmistoprojekti-1-backend.herokuapp.com/api/quiz/${quizId}`
         fetch(API_URL)
-            .then(response => response.json())
-            .then(data => {
-                //console.log(data.question)
-                setQuestionList(data.question)
-                setQuiz(data)
-            })
-            .catch(err => console.error(err))
+        .then(response => response.json())
+        .then(data => {
+            //console.log(data.question)
+            setQuestionList(data.question)
+            setQuiz(data)
+            setLoading(false)
+        })
+        .catch(err => console.error(err))
+    }
+    
+    // If page is still loading, show user a Loading indicator
+    if (isLoading) {
+        return (
+            <LoadingSpinner />
+        )
     }
 
     const radioOrText = (question) => {
