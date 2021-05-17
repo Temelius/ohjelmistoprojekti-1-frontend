@@ -13,7 +13,14 @@ const Results = (props) => {
 
     useEffect(() => {
         getQuizQuestions()
+
+        componentDidMount()
     }, [])
+    
+    // Scroll to top when page loads
+    const componentDidMount = () => {
+        window.scrollTo(0, 0)
+    }
 
     const getQuizQuestions = () => {
         const API_URL = `https://ohjelmistoprojekti-1-backend.herokuapp.com/api/quiz/${quizId}`
